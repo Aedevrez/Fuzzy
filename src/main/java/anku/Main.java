@@ -14,16 +14,5 @@ public class Main {
 
         UserInterface ui = new UserInterface(scanner);
         ui.run();
-
-        double value = 251.;
-        if (value < 0) {
-            System.out.println("null");;
-        }
-
-        double fuzzyValue = max(0.0,
-                            min(1.0,
-                            min(((value - 50) / 50), ((250 - value) / 50))));
-
-        System.out.println(fuzzyValue);;
     }
 }

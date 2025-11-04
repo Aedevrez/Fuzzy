@@ -1,5 +1,6 @@
 package anku.ui;
 
+import anku.data.MarketValueOfTheHouse;
 import lombok.*;
 
 import java.util.Scanner;
@@ -9,6 +10,9 @@ public class UserInterface {
     private Scanner scanner;
 
     public void run() {
-        System.out.println("so far so good");
+        double value = 861.;
+
+        MarketValueOfTheHouse marketValueOfTheHouse = new MarketValueOfTheHouse(value);
+        System.out.println(marketValueOfTheHouse);
     }
 }
