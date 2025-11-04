@@ -9,17 +9,16 @@ import static java.lang.Math.max;
 import static java.lang.Math.min;
 
 @Getter
-@Setter
 @EqualsAndHashCode
 @ToString
 public class MarketValueOfTheHouse {
 
     private enum FuzzySet {LOW, MEDIUM, HIGH, VERY_HIGH}
 
-    private double membershipOfLow;
-    private double membershipOfMedium;
-    private double membershipOfHigh;
-    private double membershipOfVeryHigh;
+    private final double membershipOfLow;
+    private final double membershipOfMedium;
+    private final double membershipOfHigh;
+    private final double membershipOfVeryHigh;
 
     public MarketValueOfTheHouse(double value) throws Exception {
         this.membershipOfLow = fuzzify(value, FuzzySet.LOW);
