@@ -44,11 +44,27 @@ public class MarketValueOfTheHouse {
         return Optional.of(fuzzyValue);
     }
 
-    private double fuzzifyHigh(double value) {
-        return 0.;
+    private Optional<Double> fuzzifyHigh(double value) {
+        if (value < 0) {
+            return Optional.empty();
+        }
+
+        double fuzzyValue = max(0.0,
+                            min(1.0,
+                            min(((value - 200) / 100), ((850 - value) / 200))));
+
+        return Optional.of(fuzzyValue);
     }
 
-    private double fuzzifyVeryHigh(double value) {
-        return 0.;
+    private Optional<Double> fuzzifyVeryHigh(double value) {
+        if (value < 0) {
+            return Optional.empty();
+        }
+
+        double fuzzyValue = max(0.0,
+                            min(1.0,
+                            (value - 650) / 200));
+
+        return Optional.of(fuzzyValue);
     }
 }
