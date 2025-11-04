@@ -9,8 +9,8 @@ import java.util.Scanner;
 public class UserInterface {
     private Scanner scanner;
 
-    public void run() {
-        double value = 861.;
+    public void run() throws Exception {
+        double value = -1.;
 
         MarketValueOfTheHouse marketValueOfTheHouse = new MarketValueOfTheHouse(value);
         System.out.println(marketValueOfTheHouse);
