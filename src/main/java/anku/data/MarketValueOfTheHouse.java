@@ -10,7 +10,6 @@ import static java.lang.Math.min;
 
 @Getter
 @EqualsAndHashCode
-@ToString
 public class MarketValueOfTheHouse {
 
     private enum FuzzySet {LOW, MEDIUM, HIGH, VERY_HIGH}
@@ -21,13 +20,13 @@ public class MarketValueOfTheHouse {
     private final double membershipOfVeryHigh;
 
     public MarketValueOfTheHouse(double value) throws Exception {
-        this.membershipOfLow = fuzzify(value, FuzzySet.LOW);
-        this.membershipOfMedium = fuzzify(value, FuzzySet.MEDIUM);
-        this.membershipOfHigh = fuzzify(value, FuzzySet.HIGH);
-        this.membershipOfVeryHigh = fuzzify(value, FuzzySet.VERY_HIGH);
+        this.membershipOfLow = singleFuzzify(value, FuzzySet.LOW);
+        this.membershipOfMedium = singleFuzzify(value, FuzzySet.MEDIUM);
+        this.membershipOfHigh = singleFuzzify(value, FuzzySet.HIGH);
+        this.membershipOfVeryHigh = singleFuzzify(value, FuzzySet.VERY_HIGH);
     }
 
-    private Double fuzzify(double value, FuzzySet fuzzySet) throws Exception{
+    private Double singleFuzzify(double value, FuzzySet fuzzySet) throws Exception{
         if (value < 0) {
             throw new NegativeValueException(value + " is negative!");
         }
@@ -40,5 +39,26 @@ public class MarketValueOfTheHouse {
                     case HIGH -> min(((value - 200) / 100), ((850 - value) / 200));
                     case VERY_HIGH -> ((value - 650) / 200);
                 }));
+    }
+
+    private Double totalFuzzify(double value) {
+        return max(membershipOfLow, max(membershipOfMedium, max(membershipOfHigh, membershipOfVeryHigh)));
+    }
+
+    public Double defuzzify() {
+        double sumOfTop = 0;
+        double sumOfBottom = 0;
+
+        for (int i = 0; i < 200; i++) {
+            sumOfTop += (i * totalFuzzify(i));
+            sumOfBottom += totalFuzzify(i);
+        }
+
+        return sumOfTop / sumOfBottom;
+    }
+
+    @Override
+    public String toString() {
+        return defuzzify().toString();
     }
 }

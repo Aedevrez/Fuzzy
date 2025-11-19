@@ -10,7 +10,7 @@ public class UserInterface {
     private Scanner scanner;
 
     public void run() throws Exception {
-        double value = -1.;
+        double value = 78;
 
         MarketValueOfTheHouse marketValueOfTheHouse = new MarketValueOfTheHouse(value);
         System.out.println(marketValueOfTheHouse);
