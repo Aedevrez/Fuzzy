@@ -49,7 +49,7 @@ public class MarketValueOfTheHouse {
         double sumOfTop = 0;
         double sumOfBottom = 0;
 
-        for (int i = 0; i < 200; i++) {
+        for (int i = 0; i < 1000; i++) {
             sumOfTop += (i * totalFuzzify(i));
             sumOfBottom += totalFuzzify(i);
         }
@@ -59,6 +59,6 @@ public class MarketValueOfTheHouse {
 
     @Override
     public String toString() {
-        return defuzzify().toString();
+        return membershipOfLow + ", " + membershipOfMedium + ", " + membershipOfHigh + ", " + membershipOfVeryHigh;
     }
 }
