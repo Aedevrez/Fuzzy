@@ -2,9 +2,10 @@ package anku.data.computedValues;
 
 import anku.data.ApplicantSalary;
 import anku.data.LocationOfTheHouse;
-import anku.data.MarketValueOfTheHouse;
+import anku.data.inputValues.MarketValueOfTheHouse;
 import anku.exceptions.NegativeValueException;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 
 import java.util.Optional;
 
@@ -12,6 +13,7 @@ import static java.lang.Math.max;
 import static java.lang.Math.min;
 
 @EqualsAndHashCode
+@Getter
 public class HouseEvaluation {
     private enum FuzzySet {VERY_LOW, LOW, MEDIUM, HIGH, VERY_HIGH}
 
@@ -68,8 +70,27 @@ public class HouseEvaluation {
                         min(location.getMembershipOfExcellent(), marketValue.getMembershipOfVeryHigh())));
     }
 
+    private Double inferMamdani() {
+        double top = 0;
+        double bottom = 0;
+        for (double i = 0; i <= 10; i+=0.1) {
+            double maxValueAtThatPoint = max(0.0,
+                                        min(1.0,
+                                        max(min((3 - i) / 3, membershipOfVeryLow), //VERY LOW
+                                        max(min(min((i / 3), ((6 - i) / 3)), membershipOfLow), //LOW
+                                        max(min(min(((i - 2) / 3), ((8 - i) / 3)), membershipOfMedium),//MEDIUM
+                                        max(min(min(((i - 4) / 3), ((10 - i) / 3)), membershipOfHigh),//HIGH
+                                        min(((i - 7) / 3), membershipOfVeryHigh)//VERY HIGH
+                                        ))))));
+
+            top += maxValueAtThatPoint * i;
+            bottom += maxValueAtThatPoint;
+        }
+        return top / bottom;
+    }
+
     @Override
     public String toString() {
-        return membershipOfLow + ", " + membershipOfMedium + ", " + membershipOfHigh + ", " + membershipOfVeryHigh;
+        return membershipOfVeryLow + ", " + membershipOfLow + ", " + membershipOfMedium + ", " + membershipOfHigh + ", " + membershipOfVeryHigh + " = " + inferMamdani();
     }
 }

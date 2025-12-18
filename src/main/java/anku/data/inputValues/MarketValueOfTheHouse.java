@@ -1,4 +1,4 @@
-package anku.data;
+package anku.data.inputValues;
 
 import anku.exceptions.NegativeValueException;
 import lombok.*;
