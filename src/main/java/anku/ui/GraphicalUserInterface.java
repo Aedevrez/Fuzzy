@@ -54,7 +54,7 @@ public class GraphicalUserInterface extends Application {
                 ApplicantEvaluation applicant = new ApplicantEvaluation(aa, sal);
                 LoanEvaluation loan = new LoanEvaluation(sal, rate, applicant, house);
 
-                output.setText(house.toString() + "\n" + applicant.toString() + "\n" + loan.toString());
+                output.setText(loan.toString());
 
             } catch (Exception ex) {
                 output.setText("Invalid input");
