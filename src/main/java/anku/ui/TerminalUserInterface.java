@@ -13,7 +13,7 @@ import lombok.*;
 import java.util.Scanner;
 
 @AllArgsConstructor
-public class UserInterface {
+public class TerminalUserInterface {
     private Scanner scanner;
 
     public void run() throws Exception {

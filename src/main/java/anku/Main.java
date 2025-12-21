@@ -1,6 +1,7 @@
 package anku;
 
-import anku.ui.UserInterface;
+import anku.ui.GraphicalUserInterface;
+import anku.ui.TerminalUserInterface;
 
 import java.util.Optional;
 import java.util.Scanner;
@@ -9,10 +10,12 @@ import static java.lang.Math.max;
 import static java.lang.Math.min;
 
 public class Main {
-    static void main() throws Exception {
-        Scanner scanner = new Scanner(System.in);
+    public static void main(String[] args) throws Exception {
+        /*Scanner scanner = new Scanner(System.in);
 
-        UserInterface ui = new UserInterface(scanner);
-        ui.run();
+        TerminalUserInterface tui = new TerminalUserInterface(scanner);
+        tui.run();*/
+
+        GraphicalUserInterface.launch(GraphicalUserInterface.class, args);
     }
 }

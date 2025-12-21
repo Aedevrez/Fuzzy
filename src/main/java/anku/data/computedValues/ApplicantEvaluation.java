@@ -56,12 +56,28 @@ public class ApplicantEvaluation {
         double top = 0;
         double bottom = 0;
         for (double i = 0; i <= 10; i+=0.1) {
-            double maxValueAtThatPoint = max(0.0,
-                    min(1.0,
-                            max(min((4 - i) / 2, membershipOfLow), // LOW
-                                    max(min(min(((2 - i) / 3), ((8 - i) / 3)), membershipOfMedium), //MEDIUM
-                                            (min(((i - 6) / 2), membershipOfHigh)//HIGH
-                                            )))));
+            double maxValueAtThatPoint = max(
+                    min(
+                            max(0, min((4 - i) / 2, 1)),
+                            membershipOfLow
+                    ),
+                    max(
+                            min(
+                                    max(
+                                            0,
+                                            min(
+                                                    min((i - 2) / 3, (8 - i) / 3),
+                                                    1
+                                            )
+                                    ),
+                                    membershipOfMedium
+                            ),
+                            min(
+                                    max(0, min((i - 6) / 2, 1)),
+                                    membershipOfHigh
+                            )
+                    )
+            );
 
             top += maxValueAtThatPoint * i;
             bottom += maxValueAtThatPoint;
@@ -71,6 +87,6 @@ public class ApplicantEvaluation {
 
     @Override
     public String toString() {
-        return membershipOfLow + ", " + membershipOfMedium + ", " + membershipOfHigh + " = " + inferMamdani();
+        return "Applicant Evaluation = " + inferMamdani();
     }
 }

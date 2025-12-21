@@ -91,6 +91,6 @@ public class HouseEvaluation {
 
     @Override
     public String toString() {
-        return membershipOfVeryLow + ", " + membershipOfLow + ", " + membershipOfMedium + ", " + membershipOfHigh + ", " + membershipOfVeryHigh + " = " + inferMamdani();
+        return "House Evaluation = " + inferMamdani();
     }
 }

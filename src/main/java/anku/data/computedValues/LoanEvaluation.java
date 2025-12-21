@@ -86,6 +86,6 @@ public class LoanEvaluation {
 
     @Override
     public String toString() {
-        return membershipOfVeryLow + ", " + membershipOfLow + ", " + membershipOfMedium + ", " + membershipOfHigh + ", " + membershipOfVeryHigh + " = " + inferMamdani();
+        return "Loan Evaluation = " + inferMamdani();
     }
 }
